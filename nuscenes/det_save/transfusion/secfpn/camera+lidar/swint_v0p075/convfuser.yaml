@@ -1,0 +1,24 @@
+fp16: null  # disable AMP so spconv runs in fp32 for this experiment
+
+model:
+  fuser:
+    type: Diffuser
+    in_channels: [80, 256]
+    mid_planes: [ 336, 128, 256 ]
+    out_channels: 336 #256
+
+    # SAMPLER CONFIG
+    sampler: ddim # 'ddim' 'dpmsolver' 'dpmsolver++' 'sde-dpmsolver 'sde-dpmsolver++' 'deis'
+    sampling_timesteps: 4
+    ddim_sampling_eta: 1.0
+    # FOR DPM SOLVER
+    solver_type: midpoint # for dpm solver
+    lower_order_final: True
+    solver_order: 2
+
+    # sensor drop
+    sensor_mask_prob: 0.0
+    sensor_mask: 'random'
+
+    return_intermediate: False
+
